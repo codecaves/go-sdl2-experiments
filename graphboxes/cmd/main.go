@@ -5,21 +5,16 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
+type Entity interface {
+	display(renderer *sdl.Renderer)
+}
+
 type Box struct {
 	color sdl.Color
-	width int
-	height int
-	x float32
-	y float32
+	rect sdl.Rect
 }
 
 func (box *Box) display(renderer *sdl.Renderer) {
-	var rect sdl.Rect
-
-	rect.X = int32(box.x)
-	rect.Y = int32(box.y)
-	rect.H = int32(box.height)
-	rect.W = int32(box.width)
 
 	renderer.SetDrawColor(
 		box.color.R,
@@ -27,18 +22,25 @@ func (box *Box) display(renderer *sdl.Renderer) {
 		box.color.B,
 		box.color.A,
 	)
-	renderer.FillRect(&rect)
+	renderer.FillRect(&box.rect)
 }
 
 func initEntities() []Box {
 	var ents []Box
 
-	ents = append(ents, Box{
-		x: 50,
-		y: 50,
-		height: 25,
-		width: 25,
-		color: sdl.Color{R: 255, G: 0, B: 0, A: 255},
+	ents = append(ents, 
+		Box{
+			rect: sdl.Rect { 
+				X: 50,
+				Y: 50,
+				H: 25,
+				W: 25,
+			},
+			color: sdl.Color{
+				R: 255, 
+				G: 0, 
+				B: 0, 
+				A: 255},
 	})
 
 	return ents
