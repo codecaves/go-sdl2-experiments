@@ -5,7 +5,7 @@ import (
 )
 
 type Entity interface {
-	Display(renderer *sdl.Renderer)
+	Display (renderer *sdl.Renderer)
 }
 
 type Box struct {

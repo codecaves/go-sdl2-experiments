@@ -5,11 +5,11 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
-func initEntities() []lib.Box {
-	var ents []lib.Box
+func initEntities() []lib.Entity {
+	var ents []lib.Entity
 
 	ents = append(ents, 
-		lib.Box{
+		&lib.Box{
 			Rect: sdl.Rect { 
 				X: 50,
 				Y: 50,
@@ -26,11 +26,11 @@ func initEntities() []lib.Box {
 	return ents
 }
 
-func updateEntities(entities []lib.Box) {
+func updateEntities(entities []lib.Entity) {
 	;
 }
 
-func drawEntitites(entities []lib.Box, r *sdl.Renderer) {
+func drawEntitites(entities []lib.Entity, r *sdl.Renderer) {
 	for _, ent := range entities {
 		ent.Display(r)
 	}
@@ -77,7 +77,7 @@ func main() {
 	// Initialize objects
 	ents := initEntities()
 
-	EventLoop:
+	GameLoop:
 	for running {
 
 		// Blank the screen
@@ -89,7 +89,7 @@ func main() {
 			case *sdl.QuitEvent:
 				println("Goodbye!")
 				running = false
-				break EventLoop
+				break GameLoop
 			}
 		}
 
